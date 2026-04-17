@@ -51,31 +51,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <span className="trust-badge">Fully Licensed & Insured</span>
         </div>
 
-        {/* Hero */}
-        <div className="hero-section" style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(45,45,45,0.85) 100%), url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          padding: '28px 40px',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          <div style={{ position: 'absolute', right: '-60px', top: '-60px', width: '300px', height: '300px', borderRadius: '50%', backgroundColor: 'rgba(249,115,22,0.1)', pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', left: '-40px', bottom: '-40px', width: '200px', height: '200px', borderRadius: '50%', backgroundColor: 'rgba(249,115,22,0.06)', pointerEvents: 'none' }} />
+{/* Hero */}
+<div style={{
+  backgroundImage: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 60%, #1a1a1a 100%)',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  padding: '28px 40px',
+  textAlign: 'center',
+  position: 'relative',
+  overflow: 'hidden',
+  willChange: 'transform',
+  contain: 'layout',
+}}>
+  <div style={{ position: 'absolute', right: '-60px', top: '-60px', width: '300px', height: '300px', borderRadius: '50%', backgroundColor: 'rgba(249,115,22,0.1)', pointerEvents: 'none' }} />
+  <div style={{ position: 'absolute', left: '-40px', bottom: '-40px', width: '200px', height: '200px', borderRadius: '50%', backgroundColor: 'rgba(249,115,22,0.06)', pointerEvents: 'none' }} />
 
-          <div style={{ animation: 'fadeInUp 0.6s ease forwards' }}>
-            <div style={{ display: 'inline-block', backgroundColor: '#F97316', color: 'white', fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', padding: '4px 14px', borderRadius: '4px', marginBottom: '12px' }}>
-              Skip Hire Made Easy
-            </div>
-            <h1 className="hero-title" style={{ color: '#ffffff', fontSize: '40px', fontWeight: '800', lineHeight: 1.1, marginBottom: '10px', letterSpacing: '-0.5px' }}>
-              Book Your Skip <span style={{ color: '#F97316' }}>Online Today</span>
-            </h1>
-            <p style={{ color: '#cccccc', fontSize: '15px', lineHeight: 1.5, maxWidth: '500px', margin: '0 auto' }}>
-              Fast, affordable skip hire across the UK — done in minutes.
-            </p>
-          </div>
-        </div>
+  <div style={{ animation: 'fadeInUp 0.6s ease forwards' }}>
+    <div style={{ display: 'inline-block', backgroundColor: '#F97316', color: 'white', fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', padding: '4px 14px', borderRadius: '4px', marginBottom: '12px' }}>
+      Skip Hire Made Easy
+    </div>
+    <h1 className="hero-title" style={{ color: '#ffffff', fontSize: '40px', fontWeight: '800', lineHeight: 1.1, marginBottom: '10px', letterSpacing: '-0.5px' }}>
+      Book Your Skip <span style={{ color: '#F97316' }}>Online Today</span>
+    </h1>
+    <p style={{ color: '#cccccc', fontSize: '15px', lineHeight: 1.5, maxWidth: '500px', margin: '0 auto' }}>
+      Fast, affordable skip hire across the UK — done in minutes.
+    </p>
+  </div>
+</div>
 
         {children}
 
