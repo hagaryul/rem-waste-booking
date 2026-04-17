@@ -1,0 +1,24 @@
+{
+  "postcodes": {
+    "valid": "SW1A 1AA",
+    "empty": "EC1A 1BB",
+    "slow": "M1 1AE",
+    "error": "BS1 4DJ"
+  },
+  "addresses": {
+    "general": "addr_1",
+    "heavy": "addr_2",
+    "plasterboard_separate": "addr_3",
+    "plasterboard_mixed": "addr_4",
+    "plasterboard_collection": "addr_5",
+    "double_submit": "addr_6"
+  },
+  "skips": {
+    "small": "4-yard",
+    "medium": "6-yard",
+    "large": "8-yard",
+    "xl": "10-yard",
+    "disabled_heavy_1": "12-yard",
+    "disabled_heavy_2": "14-yard"
+  }
+}

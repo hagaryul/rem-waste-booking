@@ -1,65 +1,55 @@
-import Image from "next/image";
+'use client'
+
+import { useState } from 'react'
+import StepPostcode from '@/components/StepPostcode'
+import StepWasteType from '@/components/StepWasteType'
+import StepSkipSelect from '@/components/StepSkipSelect'
+import StepReview from '@/components/StepReview'
+import { BookingData } from '@/lib/types'
+import { colors } from '@/lib/styles'
+
+const STEPS = ['Postcode', 'Waste Type', 'Skip Size', 'Review']
 
 export default function Home() {
+  const [step, setStep] = useState(0)
+  const [booking, setBooking] = useState<Partial<BookingData>>({})
+
+  const updateBooking = (data: Partial<BookingData>) => {
+    setBooking(prev => ({ ...prev, ...data }))
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main style={{ backgroundColor: '#f0f0f0', paddingBottom: '64px' }}>
+      <div className="page-wrapper" style={{ maxWidth: '680px', margin: '0 auto', padding: '24px 16px' }}>
+
+        {/* Progress bar */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '32px', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: '16px', left: '10%', right: '10%', height: '3px', backgroundColor: colors.border, zIndex: 0 }} />
+          {STEPS.map((label, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, flex: 1 }}>
+              <div style={{
+                width: '36px', height: '36px', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontWeight: 'bold', fontSize: '14px',
+                backgroundColor: i < step ? colors.orange : i === step ? colors.orangeDark : colors.border,
+                color: i <= step ? colors.white : '#999',
+                border: i === step ? `3px solid ${colors.black}` : '3px solid transparent',
+                boxShadow: i === step ? '0 0 0 3px rgba(249,115,22,0.2)' : 'none',
+              }}>
+                {i < step ? '✓' : i + 1}
+              </div>
+              <span style={{ fontSize: '11px', marginTop: '6px', color: i <= step ? colors.black : '#999', fontWeight: i === step ? 'bold' : 'normal' }}>
+                {label}
+              </span>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+
+        {step === 0 && <StepPostcode onNext={(data) => { updateBooking(data); setStep(1) }} />}
+        {step === 1 && <StepWasteType onNext={(data) => { updateBooking(data); setStep(2) }} onBack={() => setStep(0)} />}
+        {step === 2 && <StepSkipSelect booking={booking} onNext={(data) => { updateBooking(data); setStep(3) }} onBack={() => setStep(1)} />}
+        {step === 3 && <StepReview booking={booking as BookingData} onBack={() => setStep(2)} />}
+      </div>
+    </main>
+  )
 }
