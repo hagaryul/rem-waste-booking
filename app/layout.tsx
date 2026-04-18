@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           top: 0,
           zIndex: 100,
         }}>
-          <img src="/logo.webp" alt="REM Waste" className="header-logo" style={{ height: '70px', objectFit: 'contain' }} />
+          <img src="/logo.png" alt="REM Waste" className="header-logo" style={{ height: '70px', objectFit: 'contain' }} />
           <div style={{ textAlign: 'right' }}>
             <p style={{ fontSize: '11px', color: '#999', marginBottom: '2px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Free Quote</p>
             <a href="tel:08008085475" className="header-phone" style={{ color: '#F97316', fontWeight: '800', fontSize: '20px', textDecoration: 'none', letterSpacing: '0.5px' }}>
